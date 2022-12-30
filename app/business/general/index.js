@@ -1,5 +1,5 @@
 import queries from './queries/index.js'
-import driver from '../../config/driver/mysql/index.js'
+import driver from '../../config/driver/mysql-driver/index.js'
 import consts from '../consts/index.js'
 
 const createTables = async () => {

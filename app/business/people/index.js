@@ -1,4 +1,4 @@
-import driver from '../../config/driver/mysql/index.js'
+import driver from '../../config/driver/mysql-driver/index.js'
 import queries from './queries/index.js'
 import utils from '../../utils/index.js'
 
