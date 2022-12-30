@@ -1,23 +1,42 @@
 import driver from '../../config/driver/mysql/index.js'
 import queries from './queries/index.js'
+import utils from '../../utils/index.js'
+
+const create = async (name) => await driver.runQuery(queries.INSERT_PEOPLE(name));
 
 const get = async () => {
-    let response =  await driver.runQuery(queries.GET_PEOPLES);
+    let response = [];
 
-    if (response.results.length != 0)
-        return response.results;
+    try {
+        response = await driver.runQuery(queries.GET_PEOPLES);
 
-    const mocks = ['Zezinho', 'huguinho', 'Luisinho'];
-    let results = [];
+        if ((response || []).length != 0) {
+            const randIndex = utils.randomIntFromInterval(0, response.length - 1);
 
-    for (let mock in mocks)
-        results.push( await driver.runQuery(queries.INSERT_PEOPLE(mock)));
+            const newName = utils.shuffleArray([...response[randIndex].Name])
 
-    response =  await driver.runQuery(queries.GET_PEOPLES);
+            await create(newName.join(''));
 
-    return response.results;
+            response = await driver.runQuery(queries.GET_PEOPLES);
+
+            return response;
+        }
+
+        const mocks = ['Zezinho', 'huguinho', 'Luisinho'];
+        let results = [];
+
+        for (let mock in mocks)
+            results.push(await create(mocks[mock]));
+
+        response = await driver.runQuery(queries.GET_PEOPLES);
+    } catch (error) {
+        console.log('erro na busca! ', error)
+    }
+
+    return response.map(x => x = { ...x });
 }
 
 export default {
-    get
+    get,
+    create
 }
