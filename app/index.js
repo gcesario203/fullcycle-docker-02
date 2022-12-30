@@ -1,13 +1,12 @@
-const express = require('express')
+import express from 'express'
+import config from './config/index.js';
 
 const app = express();
-
-const port = 3000;
 
 app.get('/', (req, res) => {
     res.send('Ola mundo!');
   });
   
-  app.listen(port, () => {
-    console.log(`Example app listening at http://*:${port}`);
+  app.listen(config.infra.PORT, () => {
+    console.log(`Example app listening at http://*:${config.infra.PORT}`);
   });
