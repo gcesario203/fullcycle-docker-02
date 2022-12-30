@@ -1,0 +1,42 @@
+version: '3'
+
+name: 'desafio-02-desenv'
+
+networks:
+  desafio-02:
+    driver: bridge
+
+services:
+  mysql-db:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: mysql-db
+    restart: always
+    tty: true
+    environment:
+      - MYSQL_DATABASE=desafio02
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ./mysql:/var/lib/mysql
+    networks:
+      - desafio-02
+
+  node-dsv:
+    image: node
+    ports:
+      - 3000:3000
+    volumes:
+      - D:/Projetos/docker-fc/docker/node/app:/app
+    working_dir: /app
+    container_name: node-dsv
+    command: npx nodemon index.js
+    tty: true
+    depends_on:
+      - mysql-db
+    environment:
+      - DB_HOST=mysql-db
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=desafio02
+    networks:
+      - desafio-02
