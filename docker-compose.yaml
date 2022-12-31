@@ -1,0 +1,52 @@
+version: '3'
+
+name: 'desafio-02-prod'
+
+networks:
+  desafio-02:
+    driver: bridge
+
+services:
+  nginx-desafio-02:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: 'nginx-desafio-02'
+    container_name: 'nginx-desafio-02'
+    depends_on:
+      - node-desafio-02
+    ports:
+      - 8080:80
+    networks:
+      - desafio-02
+
+  mysql-db:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: mysql-db
+    restart: always
+    tty: true
+    environment:
+      - MYSQL_DATABASE=desafio02
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ./mysql:/var/lib/mysql
+    networks:
+      - desafio-02
+
+  node-desafio-02:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    image: 'node-desafio-02'
+    container_name: 'node-desafio-02'
+    depends_on:
+      - mysql-db
+    environment:
+      - DB_HOST=mysql-db
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=desafio02
+      - ENV=production
+    networks:
+      - desafio-02

@@ -2,11 +2,14 @@ FROM node:alpine as build
 
 WORKDIR /app
 
-COPY ./app /app
+COPY package.json /app
 
 RUN npm i && \
-    npm i pkg -g && \
-    npm run publish
+    npm i pkg -g
+
+COPY . /app
+
+RUN npm run publish
 
 FROM alpine:latest
 
