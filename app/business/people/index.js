@@ -1,6 +1,6 @@
-import driver from '../../config/driver/mysql-driver/index.js'
-import queries from './queries/index.js'
-import utils from '../../utils/index.js'
+const driver = require('../../config/driver/mysql-driver/index.js')
+const queries = require('./queries/index.js')
+const utils = require('../../utils/index.js')
 
 const create = async (name) => await driver.runQuery(queries.INSERT_PEOPLE(name));
 
@@ -36,7 +36,7 @@ const get = async () => {
     return response.map(x => x = { ...x });
 }
 
-export default {
+module.exports = {
     get,
     create
 }

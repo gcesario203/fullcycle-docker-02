@@ -1,7 +1,7 @@
-import express from 'express'
-import config from './config/index.js';
-import general from './business/general/index.js';
-import people from './business/people/index.js';
+const express = require('express');
+const config = require('./config/index.js');
+const general = require('./business/general/index.js');
+const people = require('./business/people/index.js');
 
 const app = express();
 

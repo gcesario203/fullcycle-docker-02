@@ -1,7 +1,8 @@
-import db from './db/index.js'
-import infra from './infra/index.js'
+const db = require('./db/index.js');
+const infra = require('./infra/index.js');
 
-export default {
-    db: {...db},
-    infra: {...infra}
+
+module.exports = {
+    db,
+    infra
 }

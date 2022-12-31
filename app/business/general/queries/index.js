@@ -5,6 +5,6 @@ const CREATE_TABLE = (tableName, fields) =>
         )
     `
 
-export default {
+module.exports = {
     CREATE_TABLE
 }                                            

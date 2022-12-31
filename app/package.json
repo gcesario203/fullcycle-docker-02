@@ -1,18 +1,27 @@
 {
-  "name": "app",
+  "name": "desafio02",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx nodemon index.js",
+    "publish": "pkg ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "mysql": "^2.18.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.20"
   },
-  "type": "module"
+  "pkg": {
+    "targets": [
+      "latest"
+    ]
+  },
+  "type": "commonjs"
 }

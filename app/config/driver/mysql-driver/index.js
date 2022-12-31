@@ -1,5 +1,5 @@
-import mysql from 'mysql'
-import config from '../../db/index.js'
+const mysql = require('mysql')
+const config= require( '../../db/index.js')
 
 const createPool = (host, user, password, database) =>
     mysql.createPool({
@@ -26,4 +26,4 @@ const runQuery = (sql) => {
     })
 }
 
-export default { runQuery };
+module.exports = { runQuery }

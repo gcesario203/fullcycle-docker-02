@@ -29,7 +29,7 @@ services:
       - D:/Projetos/docker-fc/docker/node/app:/app
     working_dir: /app
     container_name: node-dsv
-    command: npx nodemon index.js
+    command: npm run start
     tty: true
     depends_on:
       - mysql-db
@@ -38,5 +38,6 @@ services:
       - DB_USER=root
       - DB_PASSWORD=root
       - DB_NAME=desafio02
+      - ENV=development
     networks:
       - desafio-02

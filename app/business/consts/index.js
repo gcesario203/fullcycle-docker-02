@@ -7,6 +7,4 @@ const tables = {
     }
 }
 
-export default {
-    tables
-}
+module.exports = { tables }

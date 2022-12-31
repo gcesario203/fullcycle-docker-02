@@ -1,6 +1,6 @@
-import queries from './queries/index.js'
-import driver from '../../config/driver/mysql-driver/index.js'
-import consts from '../consts/index.js'
+const queries = require('./queries/index.js');
+const driver = require('../../config/driver/mysql-driver/index.js');
+const consts = require('../consts/index.js');
 
 const createTables = async () => {
     for (let tableObj in consts.tables)
@@ -19,6 +19,6 @@ const checkIfTableExists = async (tableName, fields) => {
     console.log('Tabela criada com sucesso!', tableName);
 }
 
-export default {
+module.exports = {
     createTables
 }
