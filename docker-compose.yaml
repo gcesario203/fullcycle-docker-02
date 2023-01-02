@@ -38,6 +38,10 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile
+      args:
+        - DB_HOST=mysql-db
+        - DB_PORT=3306
+        - DOCKERIZE_TIMEOUT=50s
     image: 'node-desafio-02'
     container_name: 'node-desafio-02'
     depends_on:
